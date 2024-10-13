@@ -10,7 +10,7 @@ public class Comportamiento : Agent
     // Instance variables
     [SerializeField] private Transform _targetTransform;
     [SerializeField] private Transform _targetTransform2;
-    //[SerializeField] private Transform _initPos;
+    [SerializeField] private Vector3 _initialPosition;
 
     // Instance "New Position" variable
     private Vector3 _newPosition;
@@ -36,7 +36,7 @@ public class Comportamiento : Agent
     public override void OnEpisodeBegin()
     {   
         // Move the target to a new spot
-        transform.localPosition = transform.localPosition;
+        transform.localPosition = _initialPosition;
         //transform.localPosition = new Vector3(0,1,8.5f);
     }
 
@@ -55,12 +55,11 @@ public class Comportamiento : Agent
 
     public override void OnActionReceived(ActionBuffers actions)
     {
-        // Get the action
-        float _moveX = actions.ContinuousActions[0];
-        float _moveZ = actions.ContinuousActions[1];
+            float moveX = actions.ContinuousActions[0];
+        float moveZ = actions.ContinuousActions[1];
 
-        float _moveSpeed = 5f;
-        transform.localPosition += new Vector3(_moveX, 0, _moveZ)*Time.deltaTime*_moveSpeed;
+        float moveSpeed = 1f;
+        transform.position += new Vector3(moveX, 0, moveZ)*Time.deltaTime*moveSpeed;
     }
     
     private void OnTriggerEnter(Collider other)
@@ -76,10 +75,12 @@ public class Comportamiento : Agent
 
         if (other.CompareTag("wall"))
         {   
-            //Debug.LogFormat($"*** Wall hit | Total points:  ***");
-            // Add a reward
+            Debug.LogFormat($"*** Wall hit  ***");
             SetReward(-1);
+            // End the episode
+            Debug.LogFormat($"*** End episode ***");
             EndEpisode();
+            Debug.LogFormat($"*** Episode ended ***");
         }
     }
 }
