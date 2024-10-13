@@ -1,0 +1,51 @@
+{
+    "Goalie": {
+        "checkpoints": [
+            {
+                "steps": 12608,
+                "file_path": "results\\ppo\\Goalie\\Goalie-12608.onnx",
+                "reward": null,
+                "creation_time": 1728785986.2698236,
+                "auxillary_file_paths": [
+                    "results\\ppo\\Goalie\\Goalie-12608.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 12608,
+            "file_path": "results\\ppo\\Goalie.onnx",
+            "reward": null,
+            "creation_time": 1728785986.2698236,
+            "auxillary_file_paths": [
+                "results\\ppo\\Goalie\\Goalie-12608.pt"
+            ]
+        }
+    },
+    "Striker": {
+        "checkpoints": [
+            {
+                "steps": 12640,
+                "file_path": "results\\ppo\\Striker\\Striker-12640.onnx",
+                "reward": 0.0,
+                "creation_time": 1728785986.3099174,
+                "auxillary_file_paths": [
+                    "results\\ppo\\Striker\\Striker-12640.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 12640,
+            "file_path": "results\\ppo\\Striker.onnx",
+            "reward": 0.0,
+            "creation_time": 1728785986.3099174,
+            "auxillary_file_paths": [
+                "results\\ppo\\Striker\\Striker-12640.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.4.1+cpu"
+    }
+}
