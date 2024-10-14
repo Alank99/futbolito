@@ -269,7 +269,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &255077124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -328,6 +328,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 940293616, guid: af2d6f407dd7545c49a1a9d621b156b0, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1155121819, guid: af2d6f407dd7545c49a1a9d621b156b0, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1227615310, guid: af2d6f407dd7545c49a1a9d621b156b0, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1348508958, guid: af2d6f407dd7545c49a1a9d621b156b0, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1681476316, guid: af2d6f407dd7545c49a1a9d621b156b0, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2049130510, guid: af2d6f407dd7545c49a1a9d621b156b0, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1141134673700168, guid: af2d6f407dd7545c49a1a9d621b156b0, type: 3}
       propertyPath: m_Name
       value: StrikersVsGoalieField
@@ -376,9 +400,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114387866097048300, guid: af2d6f407dd7545c49a1a9d621b156b0, type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114734187185382186, guid: af2d6f407dd7545c49a1a9d621b156b0, type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5003424191498964318, guid: af2d6f407dd7545c49a1a9d621b156b0, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5003424191498964318, guid: af2d6f407dd7545c49a1a9d621b156b0, type: 3}
+      propertyPath: AgentsList.Array.size
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -810,7 +846,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1574236049
 Transform:
   m_ObjectHideFlags: 0
