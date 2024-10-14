@@ -64,14 +64,6 @@ public class Comportamiento : Agent
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("ball"))
-        {   
-            //Debug.LogWarningFormat($"*** Goal reached | Total points: {totalReward} ***");
-            // Add a reward
-            SetReward(+1);
-            Vector3 _newPosition = new Vector3(Random.Range(-10f, 10f), _targetTransform.localPosition.y, Random.Range(-10f, 10f));
-            _targetTransform.localPosition = _newPosition;
-        }
 
         if (other.CompareTag("wall"))
         {   
@@ -81,6 +73,15 @@ public class Comportamiento : Agent
             Debug.LogFormat($"*** End episode ***");
             EndEpisode();
             Debug.LogFormat($"*** Episode ended ***");
+        }
+    }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("ball"))
+        {
+            Debug.LogFormat($"*** Ball hit  ***");
+            SetReward(1);
         }
     }
 }
