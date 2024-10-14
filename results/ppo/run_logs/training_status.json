@@ -2,44 +2,44 @@
     "Goalie": {
         "checkpoints": [
             {
-                "steps": 12608,
-                "file_path": "results\\ppo\\Goalie\\Goalie-12608.onnx",
+                "steps": 448,
+                "file_path": "results\\ppo\\Goalie\\Goalie-448.onnx",
                 "reward": null,
-                "creation_time": 1728785986.2698236,
+                "creation_time": 1728868876.9062445,
                 "auxillary_file_paths": [
-                    "results\\ppo\\Goalie\\Goalie-12608.pt"
+                    "results\\ppo\\Goalie\\Goalie-448.pt"
                 ]
             }
         ],
         "final_checkpoint": {
-            "steps": 12608,
+            "steps": 448,
             "file_path": "results\\ppo\\Goalie.onnx",
             "reward": null,
-            "creation_time": 1728785986.2698236,
+            "creation_time": 1728868876.9062445,
             "auxillary_file_paths": [
-                "results\\ppo\\Goalie\\Goalie-12608.pt"
+                "results\\ppo\\Goalie\\Goalie-448.pt"
             ]
         }
     },
     "Striker": {
         "checkpoints": [
             {
-                "steps": 12640,
-                "file_path": "results\\ppo\\Striker\\Striker-12640.onnx",
-                "reward": 0.0,
-                "creation_time": 1728785986.3099174,
+                "steps": 448,
+                "file_path": "results\\ppo\\Striker\\Striker-448.onnx",
+                "reward": null,
+                "creation_time": 1728868876.9390728,
                 "auxillary_file_paths": [
-                    "results\\ppo\\Striker\\Striker-12640.pt"
+                    "results\\ppo\\Striker\\Striker-448.pt"
                 ]
             }
         ],
         "final_checkpoint": {
-            "steps": 12640,
+            "steps": 448,
             "file_path": "results\\ppo\\Striker.onnx",
-            "reward": 0.0,
-            "creation_time": 1728785986.3099174,
+            "reward": null,
+            "creation_time": 1728868876.9390728,
             "auxillary_file_paths": [
-                "results\\ppo\\Striker\\Striker-12640.pt"
+                "results\\ppo\\Striker\\Striker-448.pt"
             ]
         }
     },
