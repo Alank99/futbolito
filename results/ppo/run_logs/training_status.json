@@ -1,45 +1,32 @@
 {
-    "Goalie": {
+    "My Behavior": {
         "checkpoints": [
             {
-                "steps": 12608,
-                "file_path": "results\\ppo\\Goalie\\Goalie-12608.onnx",
-                "reward": null,
-                "creation_time": 1728785986.2698236,
+                "steps": 499940,
+                "file_path": "results\\ppo\\My Behavior\\My Behavior-499940.onnx",
+                "reward": 12.0,
+                "creation_time": 1728872949.5288255,
                 "auxillary_file_paths": [
-                    "results\\ppo\\Goalie\\Goalie-12608.pt"
+                    "results\\ppo\\My Behavior\\My Behavior-499940.pt"
+                ]
+            },
+            {
+                "steps": 500004,
+                "file_path": "results\\ppo\\My Behavior\\My Behavior-500004.onnx",
+                "reward": 12.0,
+                "creation_time": 1728872949.5735657,
+                "auxillary_file_paths": [
+                    "results\\ppo\\My Behavior\\My Behavior-500004.pt"
                 ]
             }
         ],
         "final_checkpoint": {
-            "steps": 12608,
-            "file_path": "results\\ppo\\Goalie.onnx",
-            "reward": null,
-            "creation_time": 1728785986.2698236,
+            "steps": 500004,
+            "file_path": "results\\ppo\\My Behavior.onnx",
+            "reward": 12.0,
+            "creation_time": 1728872949.5735657,
             "auxillary_file_paths": [
-                "results\\ppo\\Goalie\\Goalie-12608.pt"
-            ]
-        }
-    },
-    "Striker": {
-        "checkpoints": [
-            {
-                "steps": 12640,
-                "file_path": "results\\ppo\\Striker\\Striker-12640.onnx",
-                "reward": 0.0,
-                "creation_time": 1728785986.3099174,
-                "auxillary_file_paths": [
-                    "results\\ppo\\Striker\\Striker-12640.pt"
-                ]
-            }
-        ],
-        "final_checkpoint": {
-            "steps": 12640,
-            "file_path": "results\\ppo\\Striker.onnx",
-            "reward": 0.0,
-            "creation_time": 1728785986.3099174,
-            "auxillary_file_paths": [
-                "results\\ppo\\Striker\\Striker-12640.pt"
+                "results\\ppo\\My Behavior\\My Behavior-500004.pt"
             ]
         }
     },

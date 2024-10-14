@@ -11,9 +11,12 @@ public class Comportamiento : Agent
     [SerializeField] private Transform _targetTransform;
     [SerializeField] private Transform _targetTransform2;
     [SerializeField] private Vector3 _initialPosition;
-
     // Instance "New Position" variable
     private Vector3 _newPosition;
+    // Count of "Wall hit" log
+    private static int _wallHitCount = 0;
+    // Count of "Ball hit" log
+    private static int _ballHitCount = 0;
 
     public void Reward()
     {
@@ -34,7 +37,7 @@ public class Comportamiento : Agent
     /// Called when the agent receives an action to take.
     /// </summary>
     public override void OnEpisodeBegin()
-    {   
+    {
         // Move the target to a new spot
         transform.localPosition = _initialPosition;
         //transform.localPosition = new Vector3(0,1,8.5f);
@@ -45,7 +48,7 @@ public class Comportamiento : Agent
     /// </summary>
     /// <param name="sensor"></param>
     public override void CollectObservations(VectorSensor sensor)
-    {   
+    {
         // Add observations to the sensor
         sensor.AddObservation(transform.localPosition);
         // Add observations to the sensor
@@ -55,33 +58,32 @@ public class Comportamiento : Agent
 
     public override void OnActionReceived(ActionBuffers actions)
     {
-            float moveX = actions.ContinuousActions[0];
+        float moveX = actions.ContinuousActions[0];
         float moveZ = actions.ContinuousActions[1];
 
         float moveSpeed = 1f;
-        transform.position += new Vector3(moveX, 0, moveZ)*Time.deltaTime*moveSpeed;
+        transform.position += new Vector3(moveX, 0, moveZ) * Time.deltaTime * moveSpeed;
     }
-    
+
     private void OnTriggerEnter(Collider other)
     {
 
         if (other.CompareTag("wall"))
         {   
-            Debug.LogFormat($"*** Wall hit  ***");
-            SetReward(-1);
-            // End the episode
-            Debug.LogFormat($"*** End episode ***");
-            EndEpisode();
-            Debug.LogFormat($"*** Episode ended ***");
+            _wallHitCount++;
+            Debug.LogErrorFormat($"*** Wall hits: {_wallHitCount}  ***");
+            Castigo();
+            Finish();
         }
     }
 
     public void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("ball"))
-        {
-            Debug.LogFormat($"*** Ball hit  ***");
-            SetReward(1);
+        {   
+            _ballHitCount++;
+            Debug.LogFormat($"*** Ball hits: {_ballHitCount}  ***");
+            Reward();
         }
     }
 }
