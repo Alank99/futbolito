@@ -2,34 +2,55 @@ using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Sensors;
 using Unity.MLAgents.Actuators;
-using System;
-using Random = UnityEngine.Random;
 
 public class Comportamiento : Agent
 {
     // Instance variables
+    [SerializeField] private GameObject ball;
+    // Target transform
     [SerializeField] private Transform _targetTransform;
     [SerializeField] private Transform _targetTransform2;
     [SerializeField] private Vector3 _initialPosition;
     // Instance "New Position" variable
     private Vector3 _newPosition;
     // Count of "Wall hit" log
-    private static int _wallHitCount = 0;
+    //private static int _wallHitCount = 0;
     // Count of "Ball hit" log
-    private static int _ballHitCount = 0;
+    //private static int _ballHitCount = 0;
+    // Instance "Is Ball Near" variable to detect the ball
+    //private bool _isBallNear;
 
-    public void Reward()
+    // Max velocity on X axis (Agent)
+    private float _maxSpeedX = 1f;
+    // Max velocity on Z axis (Agent)
+    private float _maxSpeedZ = 1f;
+    // Velocity of Ball movement
+    public float _ballSpeed = -0.1f;
+    private bool _dir;
+
+    private void Update()
     {
-        SetReward(2);
+        // Move the ball automatically
+        float direction = _dir ? 1 : -1;
+        ball.transform.position += new Vector3(_ballSpeed * direction, 0, 0) * Time.deltaTime;
+
+        // Set the max movement position of the ball to avoid the ball to go out of the field
+        if (ball.transform.position.x >= -11.5f) _dir = false;
+        if (ball.transform.position.x <= 11.5f) _dir = true;
+
     }
 
-    public void Castigo()
+    public void Reward(int reward)
     {
-        SetReward(-1);
+        Debug.LogFormat("Metí gol");
+        SetReward(reward);
+        EndEpisode();
     }
 
-    public void Finish()
+    public void Castigo(int castigo)
     {
+        Debug.LogFormat("Me metieron gol");
+        SetReward(castigo);
         EndEpisode();
     }
 
@@ -38,6 +59,8 @@ public class Comportamiento : Agent
     /// </summary>
     public override void OnEpisodeBegin()
     {
+        // Instance the agent in a static position in the environment
+        ball.transform.localPosition = new Vector3(-11.5f, 1.08000004f, 0.230000004f);
         // Move the target to a new spot
         transform.localPosition = _initialPosition;
         //transform.localPosition = new Vector3(0,1,8.5f);
@@ -58,32 +81,42 @@ public class Comportamiento : Agent
 
     public override void OnActionReceived(ActionBuffers actions)
     {
-        float moveX = actions.ContinuousActions[0];
-        float moveZ = actions.ContinuousActions[1];
-
-        float moveSpeed = 1f;
-        transform.position += new Vector3(moveX, 0, moveZ) * Time.deltaTime * moveSpeed;
+        //float moveSpeed = 1f;
+        //transform.position += new Vector3(moveX, 0, moveZ) * Time.deltaTime * moveSpeed;
+        // Dinamic movement based on velovity variables
+        transform.position += new Vector3(_maxSpeedX, 0, _maxSpeedZ) * Time.deltaTime;
     }
 
     private void OnTriggerEnter(Collider other)
     {
 
         if (other.CompareTag("wall"))
-        {   
-            _wallHitCount++;
-            Debug.LogErrorFormat($"*** Wall hits: {_wallHitCount}  ***");
-            Castigo();
-            Finish();
+        {
+
+            //Debug.LogErrorFormat($"*** Wall hits: {_wallHitCount}  ***");
+            Castigo(-3);
         }
     }
+
 
     public void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("ball"))
-        {   
-            _ballHitCount++;
-            Debug.LogFormat($"*** Ball hits: {_ballHitCount}  ***");
-            Reward();
+        {
+            //Debug.LogFormat($"*** Ball hits: {_ballHitCount}  ***");
+            Reward(1);
         }
     }
+
+
+    /// <summary>
+    /// Method to move the ball to a random position in the environment.
+    /// </summary>
+    // public Vector3 MoveToRandomPosition()
+    // {
+    //     float _randPosX = Random.Range(-1f, 1f);
+    //     float _randPosZ = Random.Range(-1f, 1f);
+    //     var newpos = new Vector3(_randPosX, 0.5f, _randPosZ);
+    //     return newpos;
+    // }
 }

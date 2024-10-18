@@ -5,24 +5,19 @@ using UnityEngine;
 public class DetectCollision : MonoBehaviour
 {
     [SerializeField] private Comportamiento _comportamiento;
-   // [SerializeField] private Comportamiento _comportamiento2;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("porteria1"))
         {
-            _comportamiento.Reward();
-           // _comportamiento2.Castigo();
-            _comportamiento.Finish();
-            //_comportamiento2.Finish();
+            _comportamiento.Reward(+3);
+
         }
 
         if (other.CompareTag("porteria2"))
         {
-           // _comportamiento2.Reward();
-            _comportamiento.Castigo();
-            _comportamiento.Finish();
-            //_comportamiento2.Finish();
+            _comportamiento.Castigo(-2);
+
         }
     }
 }
