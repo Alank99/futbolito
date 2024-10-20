@@ -6,50 +6,21 @@ using Unity.MLAgents.Actuators;
 public class Comportamiento : Agent
 {
     // Instance variables
-    [SerializeField] private GameObject ball;
+    //[SerializeField] private GameObject ball;
     // Target transform
-    [SerializeField] private Transform _targetTransform;
-    [SerializeField] private Transform _targetTransform2;
-    [SerializeField] private Vector3 _initialPosition;
-    // Instance "New Position" variable
-    private Vector3 _newPosition;
-    // Count of "Wall hit" log
-    //private static int _wallHitCount = 0;
-    // Count of "Ball hit" log
-    //private static int _ballHitCount = 0;
-    // Instance "Is Ball Near" variable to detect the ball
-    //private bool _isBallNear;
-
-    // Max velocity on X axis (Agent)
-    private float _maxSpeedX = 1f;
-    // Max velocity on Z axis (Agent)
-    private float _maxSpeedZ = 1f;
-    // Velocity of Ball movement
-    public float _ballSpeed = -0.1f;
-    private bool _dir;
-
-    private void Update()
-    {
-        // Move the ball automatically
-        float direction = _dir ? 1 : -1;
-        ball.transform.position += new Vector3(_ballSpeed * direction, 0, 0) * Time.deltaTime;
-
-        // Set the max movement position of the ball to avoid the ball to go out of the field
-        if (ball.transform.position.x >= -11.5f) _dir = false;
-        if (ball.transform.position.x <= 11.5f) _dir = true;
-
-    }
+    [SerializeField] private Transform _targetTransform; // Ball transform
+    [SerializeField] private Transform _targetTransform2; // Porteria transform
+    // [SerializeField] private Vector3 initialPosition = new Vector3(0,0.95f,-0.33f);
 
     public void Reward(int reward)
     {
-        Debug.LogFormat("Metí gol");
+
         SetReward(reward);
         EndEpisode();
     }
 
     public void Castigo(int castigo)
     {
-        Debug.LogFormat("Me metieron gol");
         SetReward(castigo);
         EndEpisode();
     }
@@ -59,11 +30,11 @@ public class Comportamiento : Agent
     /// </summary>
     public override void OnEpisodeBegin()
     {
-        // Instance the agent in a static position in the environment
-        ball.transform.localPosition = new Vector3(-11.5f, 1.08000004f, 0.230000004f);
-        // Move the target to a new spot
-        transform.localPosition = _initialPosition;
-        //transform.localPosition = new Vector3(0,1,8.5f);
+        // La posición inicial del agente se mantiene igual
+        // transform.localPosition = initialPosition;
+
+        // Llama a MoveToRandomPosition() para mover la pelota a partir de su posición inicial
+    //     _targetTransform.localPosition = MoveToRandomPosition();
     }
 
     /// <summary>
@@ -81,31 +52,31 @@ public class Comportamiento : Agent
 
     public override void OnActionReceived(ActionBuffers actions)
     {
-        //float moveSpeed = 1f;
-        //transform.position += new Vector3(moveX, 0, moveZ) * Time.deltaTime * moveSpeed;
-        // Dinamic movement based on velovity variables
-        transform.position += new Vector3(_maxSpeedX, 0, _maxSpeedZ) * Time.deltaTime;
+        // Get the action
+        float _moveX = actions.ContinuousActions[0];
+        float _moveZ = actions.ContinuousActions[1];
+
+        float _moveSpeed = 1f;
+        transform.localPosition += new Vector3(_moveX, 0, _moveZ) * Time.deltaTime * _moveSpeed;
     }
 
     private void OnTriggerEnter(Collider other)
     {
 
-        if (other.CompareTag("wall"))
-        {
-
-            //Debug.LogErrorFormat($"*** Wall hits: {_wallHitCount}  ***");
-            Castigo(-3);
-        }
+        // if (other.CompareTag("wall"))
+        // {
+        //     Castigo(-3);
+        // }
     }
 
 
     public void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("ball"))
-        {
-            //Debug.LogFormat($"*** Ball hits: {_ballHitCount}  ***");
-            Reward(1);
-        }
+        // if (collision.gameObject.CompareTag("ball"))
+        // {
+        //     Reward(+2);
+        // }
+        // else Castigo(-3);
     }
 
 
@@ -114,9 +85,14 @@ public class Comportamiento : Agent
     /// </summary>
     // public Vector3 MoveToRandomPosition()
     // {
-    //     float _randPosX = Random.Range(-1f, 1f);
-    //     float _randPosZ = Random.Range(-1f, 1f);
-    //     var newpos = new Vector3(_randPosX, 0.5f, _randPosZ);
-    //     return newpos;
+    //     // Posición inicial de la pelota
+    //     Vector3 initialPos = new Vector3(-2f, 1.1f, 0f);
+    //     // Desplazamiento aleatorio a partir de la posición inicial
+    //     float num = 0f;
+    //     float _randPosX = Random.Range(-7, num);
+    //     float _randPosZ = Random.Range(-num, num);
+    //     // Suma el desplazamiento a la posición inicial
+    //     return initialPos + new Vector3(_randPosX, 0, _randPosZ);
     // }
+
 }

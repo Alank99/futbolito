@@ -10,14 +10,15 @@ public class DetectCollision : MonoBehaviour
     {
         if (other.CompareTag("porteria1"))
         {
-            _comportamiento.Reward(+3);
+            _comportamiento.Reward(+2);
+            Debug.LogFormat("Metí gol");
 
         }
 
         if (other.CompareTag("porteria2"))
         {
-            _comportamiento.Castigo(-2);
-
+            _comportamiento.Castigo(-3);
+            Debug.LogFormat("Me metieron gol");
         }
     }
 }
