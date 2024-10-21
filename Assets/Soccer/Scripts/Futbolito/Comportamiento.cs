@@ -94,5 +94,4 @@ public class Comportamiento : Agent
     //     // Suma el desplazamiento a la posición inicial
     //     return initialPos + new Vector3(_randPosX, 0, _randPosZ);
     // }
-
 }
